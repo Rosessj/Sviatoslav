@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gen-Web | Logic Generator</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .bg-mesh {
+            background-color: #f8fafc;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(210,100%,93%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 100%, hsla(220,100%,93%,1) 0, transparent 50%);
+        }
+        
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .text-gradient { background: linear-gradient(135deg, #0f172a 0%, #2563eb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .typing::after { content: '|'; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-mesh antialiased text-slate-800 min-h-screen">
+
+    <!-- ВІДНОВЛЕНИЙ ХЕДЕР З ГОЛОВНОЇ -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass border-b border-slate-200/50">
+        <div class="container mx-auto px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-6">
+                <button onclick="window.location.href='hub.html'" class="w-10 h-10 flex items-center justify-center rounded-xl bg-white text-slate-600 hover:bg-slate-900 hover:text-white transition shadow-sm border border-slate-200">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <div class="w-9 h-9 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center text-white text-[10px] font-black shadow-lg shadow-blue-200">GEN</div>
+                    <span class="font-black tracking-tighter uppercase text-sm text-slate-900">WEB</span>
+                </div>
+            </div>
+            
+            <div class="hidden lg:flex items-center space-x-1 p-1 bg-slate-100/50 rounded-2xl border border-slate-200">
+                <a href="index.html" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition flex items-center gap-2">
+                    <i class="fas fa-home"></i> Головна
+                </a>
+                <a href="generator.html" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition flex items-center gap-2">
+                    <i class="fas fa-magic"></i> Генератор
+                </a>
+                <a href="hub.html" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition flex items-center gap-2">
+                    <i class="fas fa-th-large"></i> Хаб
+                </a>
+                <div class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest bg-white text-blue-600 shadow-sm border border-slate-200 flex items-center gap-2">
+                    <i class="fas fa-tasks"></i> Квіз
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <span class="hidden md:block text-[9px] font-black text-slate-400 uppercase tracking-[0.3em] bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">Про проєкт</span>
+                <a href="about.html" class="w-10 h-10 bg-slate-900 text-white rounded-xl flex items-center justify-center hover:scale-105 transition shadow-lg"><i class="fas fa-user-graduate"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-6 pt-40 pb-20 max-w-3xl">
+        
+        <!-- СТАРТОВИЙ ЕКРАН -->
+        <div id="start-screen" class="text-center">
+            <h1 class="text-[12vw] md:text-7xl font-black text-slate-900 tracking-tighter uppercase italic mb-8 leading-[0.9] pr-4">
+    Logic <br>
+    <span class="text-gradient inline-block pr-6">Generator</span>
+</h1>
+            <p class="text-slate-500 mb-12 text-base md:text-lg italic border-l-4 border-blue-600 pl-6 md:pl-8 inline-block text-left max-w-lg">
+                Система автоматично згенерує 10 унікальних питань <br class="hidden md:block">для перевірки логіки.
+            </p>
+            <br>
+            <button onclick="startQuiz()" class="px-10 md:px-12 py-4 md:py-5 bg-slate-900 text-white rounded-3xl font-black uppercase tracking-widest hover:bg-blue-600 transition-all shadow-2xl active:scale-95">
+                Запустити сесію
+            </button>
+        </div>
+
+        <!-- КОНТЕЙНЕР КВІЗУ -->
+        <div id="quiz-ui" class="hidden">
+            <div class="mb-10 flex items-center justify-between">
+                <span class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Питання <span id="q-idx">1</span>/10</span>
+                <div class="w-32 md:w-48 h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="h-full bg-blue-600 transition-all duration-500" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] shadow-xl border border-slate-200 relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 md:p-6 text-[8px] font-mono text-slate-300">STATUS: AI_LOGIC_BUILDING</div>
+                <h2 id="question-text" class="text-2xl md:text-3xl font-black text-slate-900 mb-8 md:mb-10 leading-tight italic min-h-[120px]"></h2>
+                <div id="quiz-options" class="grid gap-4"></div>
+            </div>
+        </div>
+
+        <!-- РЕЗУЛЬТАТИ -->
+        <div id="result-screen" class="hidden text-center">
+            <div id="result-icon" class="w-20 h-20 md:w-24 md:h-24 bg-blue-600 text-white rounded-[2rem] md:rounded-[2.5rem] flex items-center justify-center mx-auto mb-8 shadow-2xl"></div>
+            <h2 id="result-status" class="text-3xl md:text-4xl font-black text-slate-900 uppercase italic mb-4"></h2>
+            <p id="result-desc" class="text-slate-500 mb-10 italic text-base md:text-lg max-w-sm mx-auto"></p>
+            <button onclick="location.reload()" class="px-10 py-4 bg-slate-900 text-white rounded-2xl font-black uppercase tracking-widest hover:bg-blue-600 transition-all shadow-lg">Нова сесія</button>
+        </div>
+
+    </main>
+
+    <script>
+        // Розширена база без посилань на розділи
+        const db = {
+            themes: [
+                "Prompt Engineering", "Автоматична генерація", "JS-модуль валідації", 
+                "Системний запит (System Prompt)", "Мультимедійна архітектура", 
+                "Контекстне вікно ШІ", "Алгоритм синхронізації", "Векторна логіка",
+                "Інтерактивний інтерфейс", "Метадані проєкту"
+            ],
+            actions: [
+                "оптимізує", "синхронізує", "структурує", "аналізує", 
+                "валідує", "масштабує", "адаптує", "генерує"
+            ],
+            targets: [
+                "архітектуру «UA Бакалаврська»", "Word-документацію", "логіку хабу", 
+                "мультимедійні ресурси", "взаємодію з ШІ", "дизайн-систему",
+                "інформаційні потоки", "алгоритми відповіді"
+            ],
+            wrongs: [
+                "Аналогова обробка запитів", "Ручне введення даних", "Жорстке кодування (Hardcode)",
+                "Статична верстка", "Ігнорування контексту", "Відмова від скриптів",
+                "Копіювання з кошика", "Лінійне представлення даних"
+            ]
+        };
+
+        let currentQ = 0;
+        let score = 0;
+        let questions = [];
+        const totalSession = 10;
+
+        function startQuiz() {
+            questions = [];
+            for(let i=0; i < totalSession; i++) {
+                const t = db.themes[Math.floor(Math.random()*db.themes.length)];
+                const a = db.actions[Math.floor(Math.random()*db.actions.length)];
+                const tr = db.targets[Math.floor(Math.random()*db.targets.length)];
+                
+                const correct = `${t} ${a} ${tr}`;
+                const distractors = [...db.wrongs].sort(() => 0.5 - Math.random()).slice(0, 2);
+
+                questions.push({
+                    q: `Яким чином ${t} у вашій системі ${a} ${tr}?`,
+                    options: [
+                        { text: correct, correct: true },
+                        { text: distractors[0], correct: false },
+                        { text: distractors[1], correct: false }
+                    ].sort(() => 0.5 - Math.random())
+                });
+            }
+
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('quiz-ui').classList.remove('hidden');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const data = questions[currentQ];
+            const qText = document.getElementById('question-text');
+            const optBox = document.getElementById('quiz-options');
+            
+            document.getElementById('q-idx').innerText = currentQ + 1;
+            document.getElementById('progress-bar').style.width = (currentQ / totalSession * 100) + '%';
+
+            qText.innerText = "";
+            qText.classList.add('typing');
+            let i = 0;
+            optBox.innerHTML = "";
+
+            function type() {
+                if (i < data.q.length) {
+                    qText.innerText += data.q.charAt(i);
+                    i++;
+                    setTimeout(type, 15);
+                } else {
+                    qText.classList.remove('typing');
+                    renderOptions();
+                }
+            }
+            type();
+        }
+
+        function renderOptions() {
+            const optBox = document.getElementById('quiz-options');
+            questions[currentQ].options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "group flex items-center justify-between p-5 md:p-6 bg-slate-50 border-2 border-transparent rounded-2xl md:rounded-3xl hover:border-blue-500 hover:bg-white transition-all font-bold text-slate-700 text-sm md:text-base text-left animate-[countUp_0.4s_ease-out_forwards]";
+                btn.style.animationDelay = `${idx * 0.1}s`;
+                btn.innerHTML = `<span>${opt.text}</span><i class="fas fa-terminal opacity-20 group-hover:opacity-100 transition text-blue-600"></i>`;
+                btn.onclick = () => {
+                    const all = document.querySelectorAll('#quiz-options button');
+                    all.forEach(b => b.disabled = true);
+                    if(opt.correct) {
+                        btn.classList.add('bg-green-50', 'border-green-500', 'text-green-700');
+                        score++;
+                    } else {
+                        btn.classList.add('bg-red-50', 'border-red-500', 'text-red-700');
+                        questions[currentQ].options.forEach((o, index) => {
+                            if(o.correct) all[index].classList.add('border-green-500', 'bg-green-50/50');
+                        });
+                    }
+                    setTimeout(() => {
+                        currentQ++;
+                        if (currentQ < totalSession) loadQuestion();
+                        else showResult();
+                    }, 1200);
+                };
+                optBox.appendChild(btn);
+            });
+        }
+
+        function showResult() {
+            document.getElementById('quiz-ui').classList.add('hidden');
+            const screen = document.getElementById('result-screen');
+            screen.classList.remove('hidden');
+            document.getElementById('progress-bar').style.width = '100%';
+
+            const icon = document.getElementById('result-icon');
+            const status = document.getElementById('result-status');
+            const desc = document.getElementById('result-desc');
+
+            const percent = (score / totalSession) * 100;
+
+            if (percent >= 80) {
+                icon.innerHTML = '<i class="fas fa-brain text-3xl"></i>';
+                status.innerText = "System Architect";
+                desc.innerText = `Відмінно! ${score}/${totalSession}. Ви повністю опанували логіку автоматизації.`;
+            } else {
+                icon.className = icon.className.replace('bg-blue-600', 'bg-slate-600');
+                icon.innerHTML = '<i class="fas fa-sync text-3xl"></i>';
+                status.innerText = "Sync Required";
+                desc.innerText = `Результат: ${score}/${totalSession}. Деякі алгоритми потребують калібрування.`;
+            }
+        }
+    </script>
+</body>
+</html>

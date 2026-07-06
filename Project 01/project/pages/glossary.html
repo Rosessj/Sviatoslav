@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic Atlas | Gen-Web</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .bg-mesh {
+            background-color: #f8fafc;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(210,100%,93%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 100%, hsla(220,100%,93%,1) 0, transparent 50%);
+        }
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .text-gradient { background: linear-gradient(135deg, #1e293b 0%, #2563eb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .map-line { border-left: 2px dashed #cbd5e1; margin-left: 1.25rem; }
+        .term-node { transition: all 0.3s ease; }
+        .term-node:hover { transform: translateX(5px); }
+    </style>
+</head>
+<body class="bg-mesh antialiased text-slate-800 min-h-screen">
+
+    <!-- Навігація -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass border-b border-slate-200/50">
+        <div class="container mx-auto px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-6">
+                <button onclick="window.location.href='../hub.html'" class="w-10 h-10 flex items-center justify-center rounded-xl bg-white text-slate-600 hover:bg-slate-900 hover:text-white transition shadow-sm border border-slate-200" title="Назад до Хабу">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <div class="w-9 h-9 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center text-white text-[10px] font-black shadow-lg shadow-blue-200">GEN</div>
+                    <span class="font-black tracking-tighter uppercase text-sm text-slate-900">WEB</span>
+                </div>
+            </div>
+            
+            <div class="hidden lg:flex items-center space-x-1 p-1 bg-slate-100/50 rounded-2xl border border-slate-200">
+                <a href="../index.html" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition flex items-center gap-2">
+                    <i class="fas fa-home"></i> Головна
+                </a>
+                <a href="../generator.html" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition flex items-center gap-2">
+                    <i class="fas fa-magic"></i> Генератор
+                </a>
+                <a href="../hub.html" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest bg-white text-blue-600 shadow-sm border border-slate-200 flex items-center gap-2 transition">
+                    <i class="fas fa-th-large"></i> Хаб
+                </a>
+                <a href="../quiz.html" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition flex items-center gap-2">
+                    <i class="fas fa-tasks"></i> Квіз
+                </a>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <a href="../about.html" class="group flex items-center space-x-4">
+                    <span class="hidden md:block text-[9px] font-black text-slate-400 uppercase tracking-[0.3em] bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200 group-hover:text-blue-600 transition-colors">Про проєкт</span>
+                    <div class="w-10 h-10 bg-slate-900 text-white rounded-xl flex items-center justify-center group-hover:scale-105 group-hover:bg-blue-600 transition shadow-lg">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="h-40"></div>
+
+    <main class="container mx-auto px-8 pb-20">
+        <header class="max-w-4xl mb-20">
+            <div class="inline-flex items-center gap-3 mb-6 bg-blue-50 px-4 py-1 rounded-full border border-blue-100">
+                <span class="text-blue-600 text-[10px] font-black uppercase tracking-[0.2em]">• Semantic Atlas</span>
+            </div>
+            <h1 class="text-6xl md:text-8xl font-black text-slate-900 tracking-tighter uppercase italic leading-[0.85] mb-8 pr-4">
+                Семантичний <br><span class="text-gradient not-italic">Атлас</span>
+            </h1>
+            <p class="text-slate-500 text-xl font-light leading-relaxed max-w-2xl">
+                Концептуальна карта термінів: системний перехід від UX-психології до технічних метаданих об'єктів мультимедійного видання.
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <!-- Секція 1: Психологія -->
+            <div class="lg:col-span-4 space-y-8">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center shadow-lg"><i class="fas fa-brain"></i></div>
+                    <h3 class="font-black uppercase tracking-widest text-[10px] text-slate-400">UX Psychology</h3>
+                </div>
+                <div class="map-line space-y-10">
+                    <div class="pl-8 relative term-node">
+                        <div class="absolute left-0 top-3 w-4 h-px bg-slate-300"></div>
+                        <h4 class="font-black text-sm uppercase italic mb-2 text-slate-900">Когнітивна легкість</h4>
+                        <p class="text-[11px] text-slate-500 leading-relaxed italic">Стан, у якому користувач обробляє інформацію без надлишкових зусиль. Досягається через візуальну ієрархію та передбачувану навігацію.</p>
+                    </div>
+                    <div class="pl-8 relative term-node">
+                        <div class="absolute left-0 top-3 w-4 h-px bg-slate-300"></div>
+                        <h4 class="font-black text-sm uppercase italic mb-2 text-slate-900">Ментальна модель</h4>
+                        <p class="text-[11px] text-slate-500 leading-relaxed italic">Уявлення про структуру ресурсу, сформоване на основі аналізу існуючих порталів (напр. Wiki Loves Monuments).</p>
+                    </div>
+                    <div class="pl-8 relative term-node">
+                        <div class="absolute left-0 top-3 w-4 h-px bg-slate-300"></div>
+                        <h4 class="font-black text-sm uppercase italic mb-2 text-slate-900">Естетико-юзабільний ефект</h4>
+                        <p class="text-[11px] text-slate-500 leading-relaxed italic">Феномен, коли користувачі сприймають більш привабливий дизайн як більш функціональний та зручний.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Секція 2: Метадані -->
+            <div class="lg:col-span-4 space-y-8">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg"><i class="fas fa-fingerprint"></i></div>
+                    <h3 class="font-black uppercase tracking-widest text-[10px] text-slate-400">Object Metadata</h3>
+                </div>
+                <div class="map-line space-y-10 border-blue-200">
+                    <div class="pl-8 relative term-node">
+                        <div class="absolute left-0 top-3 w-4 h-px bg-blue-300"></div>
+                        <h4 class="font-black text-sm uppercase italic mb-2 text-slate-900">Семантичне ядро пам'ятки</h4>
+                        <p class="text-[11px] text-slate-500 leading-relaxed italic">Набір унікальних ідентифікаторів (геолокація, дата заснування, статус охорони), що описують культурний об'єкт.</p>
+                    </div>
+                    <div class="pl-8 relative term-node">
+                        <div class="absolute left-0 top-3 w-4 h-px bg-blue-300"></div>
+                        <h4 class="font-black text-sm uppercase italic mb-2 text-slate-900">Таксономія контенту</h4>
+                        <p class="text-[11px] text-slate-500 leading-relaxed italic">Деревоподібна система класифікації локацій за категоріями для точної фільтрації в інтерактивних модулях.</p>
+                    </div>
+                    <div class="pl-8 relative term-node">
+                        <div class="absolute left-0 top-3 w-4 h-px bg-blue-300"></div>
+                        <h4 class="font-black text-sm uppercase italic mb-2 text-slate-900">Дані реального часу</h4>
+                        <p class="text-[11px] text-slate-500 leading-relaxed italic">Інтеграція динамічних параметрів (відстань до об'єкта, доступність), що підвищують цінність мультимедійного контенту.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Секція 3: Логіка -->
+            <div class="lg:col-span-4 space-y-8">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center shadow-lg"><i class="fas fa-terminal"></i></div>
+                    <h3 class="font-black uppercase tracking-widest text-[10px] text-slate-400">System Logic</h3>
+                </div>
+                <div class="map-line space-y-10 border-indigo-200">
+                    <div class="pl-8 relative term-node">
+                        <div class="absolute left-0 top-3 w-4 h-px bg-indigo-300"></div>
+                        <h4 class="font-black text-sm uppercase italic mb-2 text-slate-900">Interactive Feedback</h4>
+                        <p class="text-[11px] text-slate-500 leading-relaxed italic">Миттєва відповідь системи на дії користувача (зміна кольору кнопки, анімація), реалізована через JavaScript.</p>
+                    </div>
+                    <div class="pl-8 relative term-node">
+                        <div class="absolute left-0 top-3 w-4 h-px bg-indigo-300"></div>
+                        <h4 class="font-black text-sm uppercase italic mb-2 text-slate-900">JSON Schema</h4>
+                        <p class="text-[11px] text-slate-500 leading-relaxed italic">Стандартизований формат збереження даних, який дозволяє масштабувати кількість пам'яток без зміни програмного коду.</p>
+                    </div>
+                    <div class="pl-8 relative term-node">
+                        <div class="absolute left-0 top-3 w-4 h-px bg-indigo-300"></div>
+                        <h4 class="font-black text-sm uppercase italic mb-2 text-slate-900">DOM Маніпуляції</h4>
+                        <p class="text-[11px] text-slate-500 leading-relaxed italic">Процес динамічного оновлення вмісту сторінки на основі вибору користувача без перезавантаження всього документа.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="container mx-auto px-8 pb-12 text-center">
+        <div class="w-full h-px bg-slate-200 mb-8"></div>
+        <p class="text-[9px] font-black text-slate-400 uppercase tracking-[0.5em]">UA Бакалаврська • Semantic Atlas • 2026</p>
+    </footer>
+
+</body>
+</html>

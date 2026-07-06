@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gen-Web | AI Консультант</title>
+    
+    <!-- Підключення Tailwind та іконок -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .bg-mesh { 
+            background-color: #f8fafc; 
+            background-image: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.05) 0px, transparent 50%), 
+                              radial-gradient(at 100% 100%, rgba(79, 70, 229, 0.05) 0px, transparent 50%); 
+        }
+        .chat-container::-webkit-scrollbar { width: 4px; }
+        .chat-container::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-chat { animation: fadeIn 0.3s ease-out forwards; }
+        .typing-dot { animation: typing 1s infinite ease-in-out; }
+        @keyframes typing { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
+    </style>
+</head>
+<body class="bg-mesh antialiased text-slate-800 min-h-screen flex flex-col font-sans">
+
+    <!-- ІДЕНТИЧНА НАВІГАЦІЯ (Копія з головної) -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass border-b border-slate-200/50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-6">
+                <button onclick="history.back()" class="w-10 h-10 flex items-center justify-center rounded-xl bg-white/50 text-slate-600 hover:bg-slate-900 hover:text-white transition-all shadow-sm border border-slate-200">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <div class="w-9 h-9 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center text-white text-[10px] font-black shadow-lg shadow-blue-200">GEN</div>
+                    <span class="font-black tracking-tighter uppercase text-sm text-slate-900">WEB</span>
+                </div>
+            </div>
+            
+            <div class="hidden lg:flex items-center space-x-1 p-1 bg-slate-100/50 rounded-2xl border border-slate-200">
+                <a href="index.html" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition flex items-center gap-2">
+                    <i class="fas fa-home text-[10px]"></i> Головна
+                </a>
+                <!-- Генератор активний -->
+                <a href="generator.html" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest bg-white text-blue-600 shadow-sm border border-slate-200 flex items-center gap-2">
+                    <i class="fas fa-magic text-[10px]"></i> Генератор
+                </a>
+                <a href="hub.html" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition flex items-center gap-2">
+                    <i class="fas fa-th-large text-[10px]"></i> Хаб
+                </a>
+                <a href="quiz.html" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition flex items-center gap-2">
+                    <i class="fas fa-tasks text-[10px]"></i> Квіз
+                </a>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <span class="hidden md:block text-[9px] font-black text-slate-400 uppercase tracking-[0.3em] bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">Про проєкт</span>
+                <a href="about.html" class="w-10 h-10 bg-slate-900 text-white rounded-xl flex items-center justify-center hover:scale-105 transition shadow-lg"><i class="fas fa-user-graduate"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Точний відступ як на головній -->
+    <div class="h-32 md:h-40"></div>
+
+    <!-- Контейнер чату -->
+    <main class="container mx-auto px-4 max-w-4xl flex-grow flex flex-col mb-12">
+        <div class="glass flex-grow rounded-[2.5rem] shadow-2xl border border-white/50 flex flex-col overflow-hidden">
+            <!-- Індикатор системи -->
+            <div class="px-8 py-4 bg-white/30 border-b border-slate-200/50 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                    </span>
+                    <span class="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">AI Модуль: Активовано</span>
+                </div>
+            </div>
+
+            <div id="chatBox" class="chat-container flex-grow overflow-y-auto p-8 space-y-6 bg-white/20">
+                <div class="flex items-start gap-4 animate-chat">
+                    <div class="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white text-xs shrink-0 shadow-lg">AI</div>
+                    <div class="bg-white border border-slate-100 p-5 rounded-3xl rounded-tl-none shadow-sm max-w-[85%]">
+                        <p class="text-sm text-slate-700 leading-relaxed">Систему інтегровано. Я готовий до роботи без обмежень. Яке питання розберемо?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Зона введення -->
+            <div class="p-8 bg-slate-50/50 border-t border-slate-200/50">
+                <div class="relative max-w-3xl mx-auto flex items-center gap-4">
+                    <textarea id="userInput" rows="1" 
+                        class="w-full pl-6 pr-14 py-5 bg-white border border-slate-200 rounded-[2rem] text-sm focus:border-blue-600 focus:ring-4 focus:ring-blue-50 outline-none transition-all shadow-sm resize-none overflow-hidden"
+                        placeholder="Введіть ваш промт тут..."
+                        oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"></textarea>
+                    
+                    <button id="sendBtn" onclick="sendMessage()" class="w-14 h-14 bg-slate-900 text-white rounded-2xl flex items-center justify-center hover:bg-blue-600 hover:scale-105 active:scale-95 transition-all shadow-lg shadow-slate-200">
+                        <i class="fas fa-paper-plane text-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Футер як на головній -->
+    <footer class="container mx-auto px-6 pb-12">
+        <div class="glass p-8 rounded-[2rem] flex flex-col md:flex-row justify-between items-center gap-6 border-slate-200">
+            <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">© 2026 • ІПМТ</p>
+            <div class="flex gap-8">
+                <div class="flex items-center gap-2 text-green-500 text-[10px] font-bold uppercase tracking-widest">
+                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> Система онлайн
+                </div>
+                <a href="#" class="text-slate-400 hover:text-blue-600 transition text-[10px] font-black uppercase tracking-widest"></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const chatBox = document.getElementById('chatBox');
+        const userInput = document.getElementById('userInput');
+        
+        const API_KEY = 'AIzaSyACDC3jNm7q4nXRM2dGga-T9WC1Qn7l9yc';
+        const MODEL_ID = "gemini-flash-latest";
+
+        async function sendMessage() {
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            appendMessage('user', text);
+            userInput.value = '';
+            userInput.style.height = '';
+
+            const loadingId = appendMessage('ai', '<span class="typing-dot">.</span><span class="typing-dot" style="animation-delay:0.2s">.</span><span class="typing-dot" style="animation-delay:0.4s">.</span>');
+
+            try {
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_ID}:generateContent?key=${API_KEY}`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: text }] }]
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.error) {
+                    updateMessage(loadingId, "⚠️ " + data.error.message);
+                } else if (data.candidates && data.candidates[0].content.parts[0].text) {
+                    let aiText = data.candidates[0].content.parts[0].text;
+                    aiText = aiText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>').replace(/^\s*[\-\*]\s+/gm, '• ');
+                    updateMessage(loadingId, aiText);
+                }
+            } catch (error) {
+                updateMessage(loadingId, "❌ Помилка з'єднання.");
+            }
+        }
+
+        function appendMessage(role, text) {
+            const id = Date.now();
+            const div = document.createElement('div');
+            div.className = `flex items-start gap-4 animate-chat ${role === 'user' ? 'flex-row-reverse' : ''}`;
+            div.id = id;
+            
+            const icon = role === 'ai' 
+                ? '<div class="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white text-xs shrink-0 shadow-lg">AI</div>' 
+                : '<div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white text-xs shrink-0 shadow-lg"><i class="fas fa-user text-[10px]"></i></div>';
+            
+            const style = role === 'ai' ? 'bg-white text-slate-700' : 'bg-blue-600 text-white';
+
+            div.innerHTML = `
+                ${icon}
+                <div class="${style} p-5 rounded-[2rem] shadow-sm max-w-[85%] border border-slate-100">
+                    <div class="text-sm leading-relaxed">${text}</div>
+                </div>`;
+            
+            chatBox.appendChild(div);
+            chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
+            return id;
+        }
+
+        function updateMessage(id, newText) {
+            const msgContainer = document.getElementById(id);
+            if (msgContainer) {
+                msgContainer.querySelector('.text-sm').innerHTML = newText;
+                chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
+            }
+        }
+
+        userInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

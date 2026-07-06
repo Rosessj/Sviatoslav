@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Про автора та проєкт | Gen-Web</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .bg-mesh {
+            background-color: #f8fafc;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(210,100%,93%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 100%, hsla(220,100%,93%,1) 0, transparent 50%);
+        }
+        
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .text-gradient { background: linear-gradient(135deg, #0f172a 0%, #2563eb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .academic-section p { margin-bottom: 1.5rem; line-height: 1.8; text-align: justify; color: #475569; }
+        .profile-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .profile-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body class="bg-mesh antialiased text-slate-800 min-h-screen">
+
+    <nav class="fixed top-0 left-0 w-full z-50 glass border-b border-slate-200/50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-6">
+                <button onclick="history.back()" class="w-10 h-10 flex items-center justify-center rounded-xl bg-white/50 text-slate-600 hover:bg-slate-900 hover:text-white transition-all shadow-sm border border-slate-200">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <div class="w-9 h-9 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center text-white text-[10px] font-black shadow-lg shadow-blue-200">GEN</div>
+                    <span class="font-black tracking-tighter uppercase text-sm text-slate-900">WEB</span>
+                </div>
+            </div>
+            
+            <div class="hidden lg:flex items-center space-x-1 p-1 bg-slate-100/50 rounded-2xl border border-slate-200">
+                <a href="index.html" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition flex items-center gap-2">
+                    <i class="fas fa-home text-[10px]"></i> Головна
+                </a>
+                <a href="generator.html" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition flex items-center gap-2">
+                    <i class="fas fa-magic text-[10px]"></i> Генератор
+                </a>
+                <a href="hub.html" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition flex items-center gap-2">
+                    <i class="fas fa-th-large text-[10px]"></i> Хаб
+                </a>
+                <a href="quiz.html" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition flex items-center gap-2">
+                    <i class="fas fa-tasks text-[10px]"></i> Квіз
+                </a>
+            </div>
+
+            <div class="flex items-center space-x-4">
+               <span class="hidden md:block text-[9px] font-black text-slate-400 uppercase tracking-[0.3em] bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">Про проєкт</span>
+                <a href="about.html" class="w-10 h-10 bg-slate-900 text-white rounded-xl flex items-center justify-center hover:scale-105 transition shadow-lg"><i class="fas fa-user-graduate"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-6 pt-40 pb-24 max-w-5xl">
+        
+        <div class="grid lg:grid-cols-3 gap-12">
+            
+            <div class="lg:col-span-1">
+                <div class="profile-card glass p-8 rounded-[2.5rem] border-slate-200 sticky top-32">
+                    <div class="relative w-32 h-32 mx-auto mb-6">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-blue-600 to-indigo-400 rounded-full animate-spin-slow opacity-20"></div>
+                        <div class="w-full h-full bg-slate-900 rounded-full flex items-center justify-center text-white text-4xl shadow-2xl relative z-10">
+                            <i class="fas fa-user-astronaut"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mb-8">
+                        <h2 class="text-xl font-black uppercase tracking-tighter text-slate-900">Розробник проєкту</h2>
+                        <p class="text-blue-600 text-[10px] font-black uppercase tracking-widest mt-1">Березовий Святослав [ВП-41Д]</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 p-4 bg-white/50 rounded-2xl border border-slate-100">
+                            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-xs"><i class="fas fa-graduation-cap"></i></div>
+                            <div>
+                                <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none">Інститут</p>
+                                <p class="text-[11px] font-bold text-slate-700">Поліграфії та медійних технологій</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 bg-white/50 rounded-2xl border border-slate-100">
+                            <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-xs"><i class="fas fa-laptop-code"></i></div>
+                            <div>
+                                <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none">Стек проєкту</p>
+                                <p class="text-[11px] font-bold text-slate-700">JS, Tailwind, AI-NLP</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                                         
+                    </button>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <header class="mb-12 overflow-hidden">
+    <div class="text-[10px] font-black text-blue-600 uppercase tracking-[0.4em] mb-4 px-4">
+        Екосистема UA Бакалаврська
+    </div>
+    
+    <h1 class="text-5xl md:text-6xl font-black text-slate-900 tracking-tighter uppercase italic leading-[0.9] mb-8 px-4">
+        Філософія <br>
+        <span class="inline-block">та</span> 
+        <span class="text-gradient inline-flex tracking-[-0.08em] sm:tracking-tighter pr-10 -mr-10" 
+              style="min-width: max-content;">
+            Методологія
+        </span>
+    </h1>
+    
+    <div class="h-1 bg-slate-900 w-24 rounded-full mx-4"></div>
+</header>
+
+                <article class="academic-section">
+                    <section class="mb-12">
+                        <h2 class="text-xs font-black uppercase tracking-[0.3em] text-slate-400 mb-6 flex items-center gap-3 italic">
+                            <span class="w-8 h-[1px] bg-slate-300"></span> Хто я і чому цей проєкт?
+                        </h2>
+                        <p>
+                            Моя подорож у розробку розпочалася з бажання перетворити статичне навчання на динамічний інтерактивний процес. Як автор та розробник мультимедійного видання <strong>«Gen-Web»</strong>, я ставив собі за мету не просто написати код, а створити інструмент, який би допомагав студентам та дослідникам структурувати складні дані за допомогою алгоритмів штучного інтелекту.
+                        </p>
+                        <p>
+                            Цей проєкт — це мій особистий маніфест того, як має виглядати сучасне мультимедійне видання. Це симбіоз естетики, функціональності та інтелектуального аналізу. Я вірю, що майбутнє академічних робіт лежить у площині <em>Web-First</em> підходу, де документація є живою системою, а не мертвим PDF-файлом.
+                        </p>
+                    </section>
+
+                    <section class="mb-12">
+                        <h2 class="text-xs font-black uppercase tracking-[0.3em] text-slate-400 mb-6 flex items-center gap-3 italic">
+                            <span class="w-8 h-[1px] bg-slate-300"></span> Глибина проєкту
+                        </h2>
+                        <div class="space-y-6">
+                            <div class="p-8 glass rounded-[2.5rem] border-blue-100 relative overflow-hidden group">
+                                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600/5 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-700"></div>
+                                <h3 class="font-black uppercase tracking-widest text-slate-900 mb-4 flex items-center gap-2">
+                                    <i class="fas fa-brain text-blue-600"></i> Інтелект системи
+                                </h3>
+                                <p class="text-sm text-slate-500 italic mb-0">
+                                    Я інтегрував у платформу кастомний "Logic Generator", який використовує семантичні бази даних для створення унікальних квізів. Це не просто випадкові питання — це алгоритмічно вивірена система перевірки когнітивних зв'язків користувача з матеріалом.
+                                </p>
+                            </div>
+
+                            <div class="p-8 glass rounded-[2.5rem] border-slate-200 relative overflow-hidden group">
+                                <h3 class="font-black uppercase tracking-widest text-slate-900 mb-4 flex items-center gap-2">
+                                    <i class="fas fa-layer-group text-indigo-600"></i> Архітектурна чистота
+                                </h3>
+                                <p class="text-sm text-slate-500 italic mb-0">
+                                    Кожна лінія коду була оптимізована для забезпечення миттєвого відгуку. Моя робота над "UA Курсова" стала фундаментом для цієї системи, де я відшліфував механізми синхронізації між візуальним інтерфейсом та структурною логікою бакалаврської роботи.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xs font-black uppercase tracking-[0.3em] text-slate-400 mb-6 flex items-center gap-3 italic">
+                            <span class="w-8 h-[1px] bg-slate-300"></span> Моя візія
+                        </h2>
+                        <p class="font-medium text-slate-900 italic">
+                            «Для мене цей проєкт — не просто фінальна точка навчання. Це прототип екосистеми майбутнього, де знання не просто зберігаються, а активно взаємодіють з людиною за допомогою AI та сучасного дизайну».
+                        </p>
+                    </section>
+                </article>
+            </div>
+        </div>
+
+        <footer class="mt-20">
+            <div class="glass p-8 rounded-[2rem] flex flex-col md:flex-row justify-between items-center gap-6 border-slate-200">
+                <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">© 2026 • ІПМТ</p>
+                <div class="flex gap-8">
+                    <div class="flex items-center gap-2 text-green-500 text-[10px] font-bold uppercase tracking-widest">
+                        <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> Система онлайн
+                    </div>
+                    <a href="#" class="text-slate-400 hover:text-blue-600 transition text-[10px] font-black uppercase tracking-widest"></a>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+</body>
+</html>
