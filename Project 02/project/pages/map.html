@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карта пам'яток | UA Курсова</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .map-page { background: #f4f7f6; min-height: 100vh; padding-top: 80px; }
+        
+        .map-hero {
+            background: linear-gradient(-45deg, #1a1a1a, #2c3e50, #000000);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            margin-bottom: 40px;
+        }
+
+        .map-hero h1 { font-size: 3rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            padding-bottom: 50px;
+        }
+
+        .location-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .location-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+
+        .loc-img { height: 200px; background-size: cover; background-position: center; transition: 0.5s; }
+        .location-card:hover .loc-img { transform: scale(1.05); }
+
+        .loc-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .loc-content h3 { margin: 0 0 12px 0; color: #2c3e50; font-size: 1.4rem; }
+        .loc-content p { color: #7f8c8d; font-size: 0.95rem; margin-bottom: 25px; display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; }
+        .loc-content p i { color: #e74c3c; margin-top: 3px; }
+
+        .btn-map {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: #4285F4;
+            color: white;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+            margin-top: auto;
+        }
+
+        .btn-map:hover { background: #3367d6; box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3); }
+    </style>
+</head>
+<body class="map-page">
+
+    <header class="header">
+        <nav class="container nav">
+            <div class="logo">UA<span>Курсова</span></div>
+            <div class="nav-links">
+                <a href="../index.html">Головна</a>
+                <a href="monuments.html">Пам’ятки</a>
+                <a href="gallery.html">Галерея</a>
+                <a href="map.html" class="active">Карта</a>
+                <a href="quiz.html">Вікторина</a>
+                <a href="about.html">Про проєкт</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="map-hero">
+        <h1>Маршрути Спадщини</h1>
+        <p>Оберіть одну з 10 локацій та прокладіть маршрут для подорожі</p>
+    </div>
+
+    <main class="container">
+        <div class="locations-grid">
+            
+            <div class="location-card">
+                <div class="loc-img" style="background-image: url('../images/sophia.jpg');"></div>
+                <div class="loc-content">
+                    <h3>Софія Київська</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> м. Київ, вул. Володимирська, 24</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Софійський+собор+Київ" target="_blank" class="btn-map">
+                        <i class="fab fa-google"></i> Відкрити на Карті
+                    </a>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="loc-img" style="background-image: url('../images/kamianets.jpg');"></div>
+                <div class="loc-content">
+                    <h3>Кам'янецька фортеця</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Хмельницька обл., м. Кам'янець-Подільський, вул. Замкова, 1</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Кам'янець-Подільська+фортеця" target="_blank" class="btn-map">
+                        <i class="fab fa-google"></i> Відкрити на Карті
+                    </a>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="loc-img" style="background-image: url('../images/lutsk-castle.jpg');"></div>
+                <div class="loc-content">
+                    <h3>Замок Любарта</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> м. Луцьк, вул. Кафедральна, 1А</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Замок+Любарта+Луцьк" target="_blank" class="btn-map">
+                        <i class="fab fa-google"></i> Відкрити на Карті
+                    </a>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="loc-img" style="background-image: url('../images/synevyr.jpg');"></div>
+                <div class="loc-content">
+                    <h3>Озеро Синевир</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Закарпатська обл., Хустський район, Синевирська Поляна</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Озеро+Синевир" target="_blank" class="btn-map">
+                        <i class="fab fa-google"></i> Відкрити на Карті
+                    </a>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="loc-img" style="background-image: url('../images/akkerman.jpg');"></div>
+                <div class="loc-content">
+                    <h3>Аккерманська фортеця</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Одеська обл., м. Білгород-Дністровський, вул. Віталія Гуляєва, 2В</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Аккерманська+фортеця" target="_blank" class="btn-map">
+                        <i class="fab fa-google"></i> Відкрити на Карті
+                    </a>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="loc-img" style="background-image: url('../images/chernivtsi-uni.jpg');"></div>
+                <div class="loc-content">
+                    <h3>Резиденція митрополитів</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> м. Чернівці, вул. Коцюбинського, 2 (ЧНУ)</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Чернівецький+національний+університет" target="_blank" class="btn-map">
+                        <i class="fab fa-google"></i> Відкрити на Карті
+                    </a>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="loc-img" style="background-image: url('../images/palanok.jpg');"></div>
+                <div class="loc-content">
+                    <h3>Замок Паланок</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Закарпатська обл., м. Мукачево, пров. Куруців</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Замок+Паланок+Мукачево" target="_blank" class="btn-map">
+                        <i class="fab fa-google"></i> Відкрити на Карті
+                    </a>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="loc-img" style="background-image: url('../images/odesa-opera.jpg');"></div>
+                <div class="loc-content">
+                    <h3>Одеська Опера</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> м. Одеса, пров. Театральний, 1</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Одеська+опера" target="_blank" class="btn-map">
+                        <i class="fab fa-google"></i> Відкрити на Карті
+                    </a>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="loc-img" style="background-image: url('../images/shenborn.jpg');"></div>
+                <div class="loc-content">
+                    <h3>Палац Шенборнів</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Закарпатська обл., Мукачівський р-н, с. Карпати</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Палац+Шенборнів" target="_blank" class="btn-map">
+                        <i class="fab fa-google"></i> Відкрити на Карті
+                    </a>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="loc-img" style="background-image: url('../images/hotyn.jpg');"></div>
+                <div class="loc-content">
+                    <h3>Хотинська фортеця</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Чернівецька обл., м. Хотин, вул. Фортечна, 1А</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Хотинська+фортеця" target="_blank" class="btn-map">
+                        <i class="fab fa-google"></i> Відкрити на Карті
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Проєкт «Пам’ятки України»</p>
+    </footer>
+
+</body>
+</html>

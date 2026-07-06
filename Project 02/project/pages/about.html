@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Про проєкт | UA Курсова</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #1a1a1a;
+            --accent-gold: #c5a059;
+            --text-gray: #4a4a4a;
+        }
+
+        .about-page { background: #fff; color: var(--text-gray); line-height: 1.8; }
+
+        .about-hero {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .about-hero h1 { font-size: 3rem; margin-bottom: 20px; letter-spacing: 2px; }
+
+        .academic-section {
+            max-width: 900px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+        }
+
+        .academic-section h2 {
+            color: var(--primary-dark);
+            border-left: 4px solid var(--accent-gold);
+            padding-left: 15px;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            border-top: 3px solid var(--accent-gold);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .info-card i { font-size: 2rem; color: var(--accent-gold); margin-bottom: 15px; }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .tech-item {
+            background: #eee;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .quote-block {
+            font-style: italic;
+            background: #f0f4f8;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 60px 0;
+            position: relative;
+        }
+
+        .quote-block::before {
+            content: "\f10d";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            font-size: 2rem;
+            color: var(--accent-gold);
+            opacity: 0.3;
+            position: absolute;
+            top: 10px; left: 20px;
+        }
+
+        .author-info {
+            text-align: right;
+            margin-top: 50px;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body class="about-page">
+
+    <header class="header">
+        <nav class="container nav">
+            <div class="logo">UA<span>Курсова</span></div>
+            <div class="nav-links">
+                <a href="../index.html">Головна</a>
+                <a href="monuments.html">Пам’ятки</a>
+                <a href="gallery.html">Галерея</a>
+                <a href="map.html">Карта</a>
+                <a href="quiz.html">Вікторина</a>
+                <a href="about.html" class="active">Про проєкт</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="about-hero">
+        <div class="container">
+            <h1>Про проєкт</h1>
+            <p>Науково-освітня платформа з дослідження історичної спадщини України</p>
+        </div>
+    </section>
+
+    <main class="container">
+        
+        <article class="academic-section">
+            <h2>Анотація та мета роботи</h2>
+            <p>
+                Даний вебпроєкт є результатом <b>курсової роботи</b>, присвяченої дослідженню та цифровізації 
+                історико-культурної спадщини України. Основна мета полягає у створенні інтерактивного 
+                інформаційного середовища, яке сприяє популяризації вітчизняних архітектурних пам'яток та 
+                забезпечує зручний доступ до їхньої географічної та візуальної ідентифікації.
+            </p>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>Актуальність</h3>
+                    <p>Збереження знань про національну спадщину в умовах глобалізації та сучасних викликів.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Цільова аудиторія</h3>
+                    <p>Студенти, історики, краєзнавці та туристи, що цікавляться автентичною культурою України.</p>
+                </div>
+            </div>
+        </article>
+
+        <article class="academic-section">
+            <h2>Технологічна база</h2>
+            <p>Розробка реалізована з використанням сучасних стеків веброзробки без використання сторонніх конструкторів, що забезпечує високу швидкість роботи та чистоту коду:</p>
+            <div class="tech-stack">
+                <span class="tech-item">HTML5 Semantics</span>
+                <span class="tech-item">CSS3 Flexbox & Grid</span>
+                <span class="tech-item">JavaScript (ES6+)</span>
+                <span class="tech-item">Intersection Observer API</span>
+                <span class="tech-item">Google Maps Integration</span>
+                <span class="tech-item">Responsive Web Design</span>
+            </div>
+        </article>
+
+        <div class="quote-block">
+            <p>"Архітектура — це музика, застигла в камені. Вивчення цієї музики дозволяє нам почути голос предків та зрозуміти власну ідентичність."</p>
+        </div>
+
+        <section class="author-info academic-section">
+            <p><b>Виконав:</b> Студент групи ВП-41Д</p>
+            <p><b>Березовий Святослав</p>
+            <p>2026 рік</p>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Проєкт «Пам’ятки України» — Курсова робота</p>
+    </footer>
+
+</body>
+</html>

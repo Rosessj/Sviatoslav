@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея пам'яток | UA Курсова</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gallery-body { background-color: #f8f9fa; margin: 0; font-family: 'Segoe UI', sans-serif; }
+        .gallery-hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../images/lutsk-castle.jpg') center/cover no-repeat fixed;
+            color: white; text-align: center; padding: 120px 20px 80px;
+        }
+        .gallery-hero h1 { font-size: 3rem; margin-bottom: 10px; }
+        .simple-gallery {
+            display: flex; flex-wrap: wrap; gap: 25px; justify-content: center;
+            padding: 50px 0; max-width: 1200px; margin: 0 auto;
+        }
+        .photo-card {
+            position: relative; width: calc(33.333% - 25px); height: 300px;
+            border-radius: 20px; overflow: hidden; cursor: pointer;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); opacity: 0;
+            transform: translateY(30px); transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .photo-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .photo-info {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white; padding: 25px; opacity: 0; transition: 0.4s ease;
+        }
+        .photo-card:hover img { transform: scale(1.1); }
+        .photo-card:hover .photo-info { opacity: 1; }
+        .full-view {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 10000; flex-direction: column;
+            justify-content: center; align-items: center; cursor: zoom-out;
+        }
+        .full-view img { max-width: 90%; max-height: 80%; border-radius: 8px; animation: zoomEffect 0.3s ease; }
+        @keyframes zoomEffect { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .full-view p { color: white; margin-top: 20px; font-size: 1.8rem; }
+        @media (max-width: 1024px) { .photo-card { width: calc(50% - 25px); } }
+        @media (max-width: 650px) { .photo-card { width: 100%; margin: 0 20px; height: 250px; } }
+    </style>
+</head>
+<body class="gallery-body">
+
+    <header class="header">
+        <nav class="container nav">
+            <div class="logo">UA<span>Курсова</span></div>
+            <div class="nav-links">
+                <a href="../index.html">Головна</a>
+                <a href="monuments.html">Пам’ятки</a>
+                <a href="gallery.html" class="active">Галерея</a>
+                <a href="map.html">Карта</a>
+                <a href="quiz.html">Вікторина</a>
+                <a href="about.html">Про проєкт</a>
+            </div>
+        </nav>
+    </header>
+
+   <div class="gallery-hero">
+    <h1>Наша Спадщина</h1>
+    <p>10 архітектурних шедеврів, що формують код нашої нації</p>
+</div>
+
+    <main>
+        <div class="simple-gallery" id="gallery">
+            <div class="photo-card" onclick="openFull(this)">
+                <img src="../images/sophia.jpg" alt="Софія Київська">
+                <div class="photo-info"><h3>Софія Київська</h3></div>
+            </div>
+            <div class="photo-card" onclick="openFull(this)">
+                <img src="../images/kamianets.jpg" alt="Кам'янець">
+                <div class="photo-info"><h3>Кам'янецька фортеця</h3></div>
+            </div>
+            <div class="photo-card" onclick="openFull(this)">
+                <img src="../images/odesa-opera.jpg" alt="Одеса">
+                <div class="photo-info"><h3>Одеська Опера</h3></div>
+            </div>
+            <div class="photo-card" onclick="openFull(this)">
+                <img src="../images/chernivtsi-uni.jpg" alt="Чернівці">
+                <div class="photo-info"><h3>Резиденція митрополитів</h3></div>
+            </div>
+            <div class="photo-card" onclick="openFull(this)">
+                <img src="../images/palanok.jpg" alt="Паланок">
+                <div class="photo-info"><h3>Замок Паланок</h3></div>
+            </div>
+            <div class="photo-card" onclick="openFull(this)">
+                <img src="../images/synevyr.jpg" alt="Синевир">
+                <div class="photo-info"><h3>Озеро Синевир</h3></div>
+            </div>
+            <div class="photo-card" onclick="openFull(this)">
+                <img src="../images/shenborn.jpg" alt="Шенборн">
+                <div class="photo-info"><h3>Палац Шенборнів</h3></div>
+            </div>
+            <div class="photo-card" onclick="openFull(this)">
+                <img src="../images/lutsk-castle.jpg" alt="Замок Любарта">
+                <div class="photo-info"><h3>Замок Любарта</h3></div>
+            </div>
+            <div class="photo-card" onclick="openFull(this)">
+                <img src="../images/hotyn.jpg" alt="Хотин">
+                <div class="photo-info"><h3>Хотинська фортеця</h3></div>
+            </div>
+            <div class="photo-card" onclick="openFull(this)">
+                <img src="../images/akkerman.jpg" alt="Аккерман">
+                <div class="photo-info"><h3>Аккерманська фортеця</h3></div>
+            </div>
+        </div>
+    </main>
+
+    <div id="fullView" class="full-view" onclick="this.style.display='none'">
+        <img id="fullImg" src="">
+        <p id="fullTxt"></p>
+    </div>
+
+    <script>
+        function openFull(element) {
+            const img = element.querySelector('img').src;
+            const text = element.querySelector('h3').innerText;
+            document.getElementById('fullImg').src = img;
+            document.getElementById('fullTxt').innerText = text;
+            document.getElementById('fullView').style.display = 'flex';
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.photo-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
